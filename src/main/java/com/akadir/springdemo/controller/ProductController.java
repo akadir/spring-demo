@@ -1,14 +1,15 @@
 package com.akadir.springdemo.controller;
 
+import com.akadir.springdemo.annotation.Loggable;
 import com.akadir.springdemo.dto.ProductDTO;
 import com.akadir.springdemo.entity.Product;
+import com.akadir.springdemo.entity.enumeration.LoggableType;
 import com.akadir.springdemo.mapper.ProductMapper;
 import com.akadir.springdemo.service.imp.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ import java.util.List;
  * Time: 16:57
  */
 @RestController
+@Loggable(type = LoggableType.CONTROLLER)
 public class ProductController {
     private ProductService productService;
 

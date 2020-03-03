@@ -1,7 +1,9 @@
 package com.akadir.springdemo.service.imp;
 
+import com.akadir.springdemo.annotation.Loggable;
 import com.akadir.springdemo.dao.IProductDAO;
 import com.akadir.springdemo.entity.Product;
+import com.akadir.springdemo.entity.enumeration.LoggableType;
 import com.akadir.springdemo.exception.DataNotFoundException;
 import com.akadir.springdemo.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import java.util.Optional;
  * Time: 16:50
  */
 @Service
+@Loggable(type = LoggableType.SERVICE)
 public class ProductService implements IProductService {
     private IProductDAO productDAO;
 
@@ -31,10 +34,6 @@ public class ProductService implements IProductService {
 
     public Product getProduct(Long id) {
         Optional<Product> product = Optional.ofNullable(productDAO.getOne(id));
-
-        if (!product.isPresent()) {
-            throw new DataNotFoundException();
-        }
 
         return product.get();
     }
