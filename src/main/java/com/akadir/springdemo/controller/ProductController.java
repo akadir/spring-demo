@@ -25,21 +25,21 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping(value = "create-product")
-    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
+    @PostMapping(value = "/products")
+    public ResponseEntity<ProductDTO> newProduct(@RequestBody ProductDTO productDTO) {
         Product product = ProductMapper.INSTANCE.toProduct(productDTO);
         product = productService.saveProduct(product);
         return ResponseEntity.ok(ProductMapper.INSTANCE.toProductDto(product));
     }
 
-    @GetMapping(value = "get-product")
-    public ResponseEntity<ProductDTO> getProductById(@RequestParam Long id) {
+    @GetMapping(value = "/products/{id}")
+    public ResponseEntity<ProductDTO> one(@PathVariable Long id) {
         Product product = productService.getProduct(id);
         return ResponseEntity.ok(ProductMapper.INSTANCE.toProductDto(product));
     }
 
-    @GetMapping(value = "get-all")
-    public ResponseEntity<List<ProductDTO>> getAllProduct() {
+    @GetMapping(value = "/products")
+    public ResponseEntity<List<ProductDTO>> all() {
         List<Product> products = productService.getAllProduct();
 
         return ResponseEntity.ok(ProductMapper.INSTANCE.toProductDTOList(products));
