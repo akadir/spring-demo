@@ -3,7 +3,7 @@ package com.akadir.springdemo.controller;
 import com.akadir.springdemo.annotation.Loggable;
 import com.akadir.springdemo.dto.ProductDTO;
 import com.akadir.springdemo.entity.Product;
-import com.akadir.springdemo.entity.enumeration.LoggableType;
+import com.akadir.springdemo.enumeration.LoggableType;
 import com.akadir.springdemo.exception.CustomException;
 import com.akadir.springdemo.mapper.ProductMapper;
 import com.akadir.springdemo.service.imp.ProductService;

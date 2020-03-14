@@ -1,4 +1,4 @@
-package com.akadir.springdemo.entity.enumeration;
+package com.akadir.springdemo.enumeration;
 
 /**
  * @author akadir

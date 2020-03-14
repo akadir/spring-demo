@@ -1,6 +1,6 @@
 package com.akadir.springdemo.annotation;
 
-import com.akadir.springdemo.entity.enumeration.LoggableType;
+import com.akadir.springdemo.enumeration.LoggableType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

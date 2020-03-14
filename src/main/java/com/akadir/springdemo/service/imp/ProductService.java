@@ -3,7 +3,7 @@ package com.akadir.springdemo.service.imp;
 import com.akadir.springdemo.annotation.Loggable;
 import com.akadir.springdemo.dao.IProductDAO;
 import com.akadir.springdemo.entity.Product;
-import com.akadir.springdemo.entity.enumeration.LoggableType;
+import com.akadir.springdemo.enumeration.LoggableType;
 import com.akadir.springdemo.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

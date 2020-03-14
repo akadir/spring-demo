@@ -1,7 +1,7 @@
 package com.akadir.springdemo.aspect;
 
 import com.akadir.springdemo.annotation.Loggable;
-import com.akadir.springdemo.entity.enumeration.LogLevel;
+import com.akadir.springdemo.enumeration.LogLevel;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;

@@ -1,6 +1,6 @@
 package com.akadir.springdemo.util;
 
-import com.akadir.springdemo.entity.enumeration.LogKey;
+import com.akadir.springdemo.enumeration.LogKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
