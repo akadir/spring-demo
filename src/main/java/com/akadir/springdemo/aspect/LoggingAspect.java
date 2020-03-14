@@ -24,8 +24,6 @@ import org.springframework.util.StopWatch;
 public class LoggingAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoggingAspect.class);
 
-
-    //AOP expression for which methods shall be intercepted
     @Around(value = "@within(loggable)")
     public Object profileAllMethods(ProceedingJoinPoint proceedingJoinPoint, Loggable loggable) throws Throwable {
         String classNameAndMethodName = getClassNameAndMethodName(proceedingJoinPoint);
