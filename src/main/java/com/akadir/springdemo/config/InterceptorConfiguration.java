@@ -12,11 +12,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * Time: 17:08
  */
 @Configuration
-public class Config implements WebMvcConfigurer {
+public class InterceptorConfiguration implements WebMvcConfigurer {
     LoggingInterceptor loggingInterceptor;
 
     @Autowired
-    public Config(LoggingInterceptor loggingInterceptor) {
+    public InterceptorConfiguration(LoggingInterceptor loggingInterceptor) {
         this.loggingInterceptor = loggingInterceptor;
     }
 
