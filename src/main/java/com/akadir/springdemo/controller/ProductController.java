@@ -21,29 +21,31 @@ import java.util.List;
 @Loggable(type = LoggableType.CONTROLLER)
 public class ProductController {
     private ProductService productService;
+    private ProductMapper productMapper;
 
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, ProductMapper productMapper) {
         this.productService = productService;
+        this.productMapper = productMapper;
     }
 
     @PostMapping(value = "/products")
     public ResponseEntity<ProductDTO> newProduct(@RequestBody ProductDTO productDTO) {
-        Product product = ProductMapper.INSTANCE.toProduct(productDTO);
+        Product product = productMapper.toProduct(productDTO);
         product = productService.saveProduct(product);
-        return ResponseEntity.ok(ProductMapper.INSTANCE.toProductDto(product));
+        return ResponseEntity.ok(productMapper.toProductDto(product));
     }
 
     @GetMapping(value = "/products/{id}")
     public ResponseEntity<ProductDTO> one(@PathVariable Long id) {
         Product product = productService.getProduct(id);
-        return ResponseEntity.ok(ProductMapper.INSTANCE.toProductDto(product));
+        return ResponseEntity.ok(productMapper.toProductDto(product));
     }
 
     @GetMapping(value = "/products")
     public ResponseEntity<List<ProductDTO>> all() {
         List<Product> products = productService.getAllProduct();
 
-        return ResponseEntity.ok(ProductMapper.INSTANCE.toProductDTOList(products));
+        return ResponseEntity.ok(productMapper.toProductDTOList(products));
     }
 }

@@ -3,7 +3,6 @@ package com.akadir.springdemo.mapper;
 import com.akadir.springdemo.dto.ProductDTO;
 import com.akadir.springdemo.entity.Product;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
@@ -14,8 +13,6 @@ import java.util.List;
  */
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
-    ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
-
     ProductDTO toProductDto(Product product);
 
     List<ProductDTO> toProductDTOList(List<Product> productList);
