@@ -31,8 +31,11 @@ public class MyErrorController extends AbstractErrorController {
     public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
         Map<String, Object> body = this.getErrorAttributes(request, this.isIncludeStackTrace(request));
         HttpStatus status = this.getStatus(request);
-
-        return new ResponseEntity<>(body, status);
+        if (status == HttpStatus.NO_CONTENT) {
+            return new ResponseEntity<>(status);
+        } else {
+            return new ResponseEntity<>(body, status);
+        }
     }
 
     private boolean isIncludeStackTrace(HttpServletRequest request) {
