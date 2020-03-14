@@ -13,8 +13,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class Config implements WebMvcConfigurer {
-    @Autowired
     LoggingInterceptor loggingInterceptor;
+
+    @Autowired
+    public Config(LoggingInterceptor loggingInterceptor) {
+        this.loggingInterceptor = loggingInterceptor;
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
