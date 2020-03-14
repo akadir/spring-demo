@@ -74,4 +74,8 @@ public class MDCUtil {
             MDC.put(LogKey.FORWARDED_ADDRESS.getValue(), forwardedIp);
         }
     }
+
+    public static String getRequestId() {
+        return MDC.get(LogKey.REQUEST_ID.getValue());
+    }
 }

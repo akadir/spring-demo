@@ -1,5 +1,6 @@
 package com.akadir.springdemo.entity.error;
 
+import com.akadir.springdemo.util.MDCUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
@@ -22,10 +23,12 @@ public class ApiError {
     private LocalDateTime timestamp;
     private String message;
     private String debugMessage;
+    private String requestId;
     private List<ApiSubError> subErrors;
 
     private ApiError() {
         timestamp = LocalDateTime.now();
+        requestId = MDCUtil.getRequestId();
     }
 
     public ApiError(HttpStatus status) {

@@ -1,4 +1,8 @@
 spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
   datasource:
     url: jdbc:h2:mem:demo-db
     driverClassName: org.h2.Driver
@@ -12,3 +16,7 @@ spring:
       path: /h2
 app:
   name: "@project.name@"
+server:
+  error:
+    whitelabel:
+      enabled: false

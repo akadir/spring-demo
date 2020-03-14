@@ -4,6 +4,7 @@ import com.akadir.springdemo.annotation.Loggable;
 import com.akadir.springdemo.dto.ProductDTO;
 import com.akadir.springdemo.entity.Product;
 import com.akadir.springdemo.entity.enumeration.LoggableType;
+import com.akadir.springdemo.exception.CustomException;
 import com.akadir.springdemo.mapper.ProductMapper;
 import com.akadir.springdemo.service.imp.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,15 @@ public class ProductController {
         List<Product> products = productService.getAllProduct();
 
         return ResponseEntity.ok(productMapper.toProductDTOList(products));
+    }
+
+    @GetMapping(value = "/throw")
+    public ResponseEntity<ProductDTO> throwEx() {
+        int x = 0;
+
+        if (x == 0)
+            throw new CustomException();
+
+        return ResponseEntity.ok(null);
     }
 }
