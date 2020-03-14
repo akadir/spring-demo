@@ -32,7 +32,7 @@ public class ProductService implements IProductService {
     }
 
     public Product getProduct(Long id) {
-        Optional<Product> product = Optional.ofNullable(productDAO.getOne(id));
+        Optional<Product> product = Optional.of(productDAO.getOne(id));
 
         return product.get();
     }
