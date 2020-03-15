@@ -1,5 +1,6 @@
 package com.akadir.springdemo.interceptor;
 
+import com.akadir.springdemo.enumeration.LogAttribute;
 import com.akadir.springdemo.util.MDCUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
 /**
  * @author akadir
@@ -23,7 +25,8 @@ public class LoggingInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest requestServlet, HttpServletResponse responseServlet, Object handler) throws Exception {
         MDCUtil.setUpMDC(requestServlet);
-        logger.debug("set up mdc before request to: {}", requestServlet.getRequestURI());
+        requestServlet.setAttribute(LogAttribute.ENTER_SERVICE_KEY.getName(), System.currentTimeMillis());
+        logger.info("set up mdc before request to: {}", requestServlet.getRequestURI());
         return super.preHandle(requestServlet, responseServlet, handler);
     }
 
@@ -36,7 +39,19 @@ public class LoggingInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception exception) {
-        logger.debug("tear down mdc after request to: {}", request.getRequestURI());
+        Long duration = null;
+
+        Optional<Object> optionalStartTime = Optional.ofNullable(request.getAttribute(LogAttribute.ENTER_SERVICE_KEY.getName()));
+
+        if (optionalStartTime.isPresent()) {
+            long startTime = (long) optionalStartTime.get();
+            request.removeAttribute(LogAttribute.ENTER_SERVICE_KEY.getName());
+            long endTime = System.currentTimeMillis();
+            duration = (endTime - startTime);
+        }
+
+
+        logger.info("tear down mdc for request to: {} | after: {} ms", request.getRequestURI(), duration);
         MDCUtil.tearDownMDC();
     }
 }
