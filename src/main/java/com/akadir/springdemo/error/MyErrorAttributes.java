@@ -1,5 +1,6 @@
 package com.akadir.springdemo.error;
 
+import com.akadir.springdemo.enumeration.ErrorAttributesKey;
 import com.akadir.springdemo.exception.base.SpringDemoException;
 import com.akadir.springdemo.util.MDCUtil;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
@@ -27,19 +28,20 @@ public class MyErrorAttributes extends DefaultErrorAttributes {
             updateErrorAttributes(errorAttributes, (SpringDemoException) t, webRequest);
         } else if (t instanceof EntityNotFoundException) {
             HttpStatus noContent = HttpStatus.NO_CONTENT;
-            webRequest.setAttribute("javax.servlet.error.status_code", noContent.value(), 0);
-            errorAttributes.put("status", noContent.value());
-            errorAttributes.put("error", noContent.getReasonPhrase());
+            webRequest.setAttribute(ErrorAttributesKey.WEB_REQUEST_STATUS_CODE.key(), noContent.value(), 0);
+            errorAttributes.put(ErrorAttributesKey.STATUS.key(), noContent.value());
+            errorAttributes.put(ErrorAttributesKey.ERROR.key(), noContent.getReasonPhrase());
         }
 
-        errorAttributes.put("trace-id", MDCUtil.getRequestId());
+        errorAttributes.put(ErrorAttributesKey.TRACE_ID.key(), MDCUtil.getRequestId());
 
         return errorAttributes;
     }
 
-    private void updateErrorAttributes(Map<String, Object> errorAttributes, SpringDemoException e, RequestAttributes requestAttributes) {
-        requestAttributes.setAttribute("javax.servlet.error.status_code", e.getHttpStatus().value(), 0);
-        errorAttributes.put("status", e.getHttpStatus().value());
-        errorAttributes.put("error", e.getHttpStatus().getReasonPhrase());
+    private void updateErrorAttributes(Map<String, Object> errorAttributes, SpringDemoException e,
+                                       RequestAttributes requestAttributes) {
+        requestAttributes.setAttribute(ErrorAttributesKey.WEB_REQUEST_STATUS_CODE.key(), e.getHttpStatus().value(), 0);
+        errorAttributes.put(ErrorAttributesKey.STATUS.key(), e.getHttpStatus().value());
+        errorAttributes.put(ErrorAttributesKey.ERROR.key(), e.getHttpStatus().getReasonPhrase());
     }
 }
